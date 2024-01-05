@@ -1,0 +1,15 @@
+.header {
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+
+    &__logo {
+        display: flex;
+        align-items: center;
+
+        svg {
+            height: 32px;
+            margin-right: 10px;
+        }
+    }
+}

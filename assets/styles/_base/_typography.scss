@@ -1,0 +1,32 @@
+//Responsive font size
+@import "rfs/scss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+//Bootstrap enable responsive font-size
+$enable-responsive-font-sizes: true;
+
+$font-weight--extra-light   :   200;
+$font-weight--light         :   300;
+$font-weight--regular       :   400;
+$font-weight--medium        :   500;
+$font-weight--semibold      :   600;
+$font-weight--bold          :   700;
+$font-weight--extra-bold    :   800;
+$font-weight--black         :   900;
+
+// Font definitions.
+$font-xxxx-large            :   72px;
+$font-xxx-large             :   60px;
+$font-xx-large              :   48px;
+$font-x-large               :   40px;
+$font-large                 :   38px;
+$font-xx-big                :   26px;
+$font-x-big                 :   22px;
+$font-big                   :   20px;
+$font-medium                :   18px;
+$font-regular               :   16px;
+$font-small                 :   14px;
+$font-x-small               :   12px;
+$font-xx-small              :   11px;
+$font-xxx-small             :   10px;
+$font-xxxx-small            :   9px;
