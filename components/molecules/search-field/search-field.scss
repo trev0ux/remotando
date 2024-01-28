@@ -1,0 +1,45 @@
+@import "../../../assets/styles/_base/typography";
+@import "../../../assets/styles/_base/variables";
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
+
+.search-field {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    > div {
+        width: 100%;
+
+        input {
+            border-radius: 100px;
+            height: 45px;
+        }
+    }
+
+    button {
+        position: absolute;
+        right: 15px;
+        top: 7px;
+
+        svg {
+            stroke: $primary;
+            width: 20px;
+            height: 20px;
+        }
+    }
+    &__results {
+        padding: 10px 20px;
+        margin-top: 10px;
+        box-shadow: 1px 6px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
+
+        li {
+            list-style-type: none;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    }
+}

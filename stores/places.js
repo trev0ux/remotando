@@ -3,32 +3,22 @@ import { createPinia } from "pinia";
 import { createApp } from "vue";
 import App from "../../../app.vue";
 
-const pinia = createPinia();
 const app = createApp(App);
-app.use(pinia);
+app.use(createPinia());
 
 export const usePlacesStore = defineStore("places", {
-  state: () => [
-    {
-      location: "",
-      name: "João Grilo",
-      selectedType: "",
-      website: "",
-      instagram: "",
-      socket: "",
-      wifi: false,
-      wifiPassword: "",
-      isPay: false,
-      noise: "",
-      image: "",
+  state: () => {
+    return {
+      places: [
+        {
+          name: "cu"
+        }
+      ]
+    };
+  },
+  actions: {
+    addPlace(newPlace) {
+      this.$state.places.push(newPlace);
     },
-  ],
-  //   getters: {
-  //     doubleCount: (state) => state.count * 2,
-  //   },
-  //   actions: {
-  //     increment() {
-  //       this.count++;
-  //     },
-  //   },
+  },
 });

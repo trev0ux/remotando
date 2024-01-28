@@ -1,7 +1,39 @@
+@import "../../../assets/styles/_base/typography";
+@import "../../../assets/styles/_base/variables";
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
 .add-place-modal {
+
+    .modal-content {
+        background-color: $background;
+
+    }
+
+    &__header {
+        border: none;
+    }
+    
     &__form {
         > div {
-            margin-bottom: 10Wpx;
+            margin-bottom: 10px;
+        }
+    }
+
+    &__footer {
+        border: none;
+    }
+
+    legend {
+        @include font-size($font-regular);
+        margin-bottom: 10px;
+        font-weight: $font-weight--regular;
+    }
+
+    fieldset {
+        > div {
+            display: flex;
         }
     }
 }

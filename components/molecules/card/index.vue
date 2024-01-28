@@ -7,14 +7,15 @@
       <li>5km</li>
       <li>{{ type }}</li>
     </ul>
-    <div>
+    <div class="card__features">
       <ul class="card__itens">
-        <li v-if="website">
+        <li>
+          <Icon name="LinkIcon" />
           <a :href="website">
             Website
           </a>
         </li>
-        <li v-if="instagram">
+        <li>
           <a :href="instagram">
             <Icon name="InstagramIcon" />
             Instagram
@@ -22,28 +23,29 @@
         </li>
         <li>
           <Icon name="SocketsIcon" />
-          {{ socket }}
+          Muitas
+          <!-- {{ socket }} -->
         </li>
         <li>
-          <Icon name="WifiIcon" />{{ wifi }}
+          <Icon name="WifiIcon" />
+          <!-- {{ wifi }} -->
+          Wifi gratuito
         </li>
         <li>
           <Icon name="NoiseIcon" v-if="noise === 'yes' || noise === 'tolerable'" />
           {{ noise }}
         </li>
       </ul>
-          <Icon name="PinIcon" />
+      <button type="button" class="card__location btn btn-link" >
+        <Icon name="PinIcon" />
+      </button>
     </div>
     <div class="card__footer">
       <p>
-        <Icon name="ClockIcon" /> Aberto hoje 8:00 - 17:00
-      </p>
-    </div>
-    <div v-if="wifi === 'Sim'" class="card__footer">
-      <p>
        <Icon name="LockIcon" /> {{ wifiPassword }}
+       12345678
       </p>
-      <button type="button">Copiar</button>
+      <button class="btn btn-link" type="button">Copiar</button>
     </div>
   </div>
 </template>

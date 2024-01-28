@@ -1,5 +1,5 @@
 <template>
-  <div class="form-check form-radio">
+  <div class="form-radio">
     <input
       type="radio"
       class="form-check-input"
@@ -28,3 +28,8 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "./form-radio"
+
+</style>

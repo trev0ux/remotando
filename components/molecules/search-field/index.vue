@@ -1,12 +1,17 @@
 <template>
   <div>
+    <div class="search-field">
       <form-text
         id="search"
         v-model="searchQuery"
         @update:modelValue="searchLocations"
         placeholder="Search for a location"
       />
-      <ul v-if="suggestions.length">
+      <button class="btn p-0">
+            <Icon name="SearchIcon" />
+      </button>
+    </div>
+      <ul class="search-field__results" v-if="suggestions.length">
         <li
           v-for="(suggestion, index) in suggestions"
           :key="index"
@@ -58,6 +63,7 @@ export default {
       }
     },
     selectSuggestion(suggestion) {
+      console.log(suggestion);
       this.$emit('suggestionSelected',  [suggestion.lat, suggestion.lon])
       this.suggestions = [];
     },
@@ -65,6 +71,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "./search-field";
 /* Add your custom styles here */
 </style>

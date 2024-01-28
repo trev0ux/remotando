@@ -1,3 +1,9 @@
+@import "../../../assets/styles/_base/_typography";
+@import "../../../assets/styles/_base/variables";
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
 .header {
     padding: 25px 0;
     display: flex;
@@ -10,6 +16,12 @@
         svg {
             height: 32px;
             margin-right: 10px;
+        }
+    }
+
+    button {
+        @include media-breakpoint-down(sm) {
+            @include font-size($font-small);
         }
     }
 }

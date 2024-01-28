@@ -1,6 +1,6 @@
 <template>
   <div
-    class="modal fade"
+    class="modal fade add-place-modal"
     v-if="showModal"
     :class="{ show: showModal }"
     style="display: block"
@@ -9,7 +9,7 @@
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header add-place-modal__header">
           <h5 class="modal-title">Adicionar um lugar</h5>
           <button
             type="button"
@@ -18,8 +18,8 @@
             aria-label="Close"
           ></button>
         </div>
-        <form @submit.prevent="handleSubmit">
-          <div class="modal-body">
+        <form @submit.prevent="handleSubmit" class="add-place-modal__form">
+          <section class="modal-body add-place-modal__body">
             <div class="row">
               <div class="col">
                 <div class="mb-3">
@@ -43,14 +43,6 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <form-text
-                    type="file"
-                    placeholder="Escolha um arquivo"
-                    v-model="place.image"
-                  />
-                </div>
-
-                <div class="mb-3">
                   <form-select
                     id="place-type"
                     label="Select Type"
@@ -61,71 +53,82 @@
                 <div class="mb-3">
                   <fieldset>
                     <legend>Tem tomadas no ambiente?</legend>
-                    <form-radio
-                      v-for="option in socketsOptions"
-                      :key="option.id"
-                      :id="option.id"
-                      :value="option.value"
-                      v-model="place.socket"
-                      :label="option.label"
-                      name="socket"
-                    />
+                    <div>
+                      <form-radio
+                        v-for="option in socketsOptions"
+                        :key="option.id"
+                        :id="option.id"
+                        :value="option.value"
+                        v-model="place.socket"
+                        :label="option.label"
+                        name="socket"
+                      />
+                    </div>
                   </fieldset>
                 </div>
                 <div class="mb-3">
                   <fieldset>
                     <legend>Tem ruído no ambiente?</legend>
-                    <form-radio
-                      v-for="option in noiseOptions"
-                      :key="option.id"
-                      :id="option.id"
-                      :value="option.value"
-                      v-model="place.noise"
-                      :label="option.label"
-                      name="noise"
-                    />
+                    <div>
+                      <form-radio
+                        v-for="option in noiseOptions"
+                        :key="option.id"
+                        :id="option.id"
+                        :value="option.value"
+                        v-model="place.noise"
+                        :label="option.label"
+                        name="noise"
+                      />
+                    </div>
                   </fieldset>
                 </div>
                 <div class="mb-3">
                   <fieldset>
                     <legend>Tem wifi?</legend>
-                    <form-radio
-                      v-for="option in wifiOptions"
-                      :key="option.id"
-                      :id="option.id"
-                      :value="option.value"
-                      v-model="place.wifi"
-                      :label="option.label"
-                      name="wifi"
-                    />
+                    <div>
+                      <form-radio
+                        v-for="option in wifiOptions"
+                        :key="option.id"
+                        :id="option.id"
+                        :value="option.value"
+                        v-model="place.wifi"
+                        :label="option.label"
+                        name="wifi"
+                      />
+                    </div>
                   </fieldset>
                 </div>
                 <div class="mb-3">
                   <fieldset>
                     <legend>O espaço é gratuito?</legend>
-                    <form-radio
-                      v-for="option in spaceOptions"
-                      :key="option.id"
-                      :id="option.id"
-                      :value="option.value"
-                      v-model="place.isPay"
-                      :label="option.label"
-                      name="space"
-                    />
+                    <div>
+                      <form-radio
+                        v-for="option in spaceOptions"
+                        :key="option.id"
+                        :id="option.id"
+                        :value="option.value"
+                        v-model="place.isPay"
+                        :label="option.label"
+                        name="space"
+                      />
+                    </div>
                   </fieldset>
                 </div>
               </div>
-              <div class="col">
-                <!-- Your OpenStreetMap component goes here -->
+              <div class="col add-place-modal__map">
                 <Map :center="center" :zoom="zoom" />
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" @click="closeModal">
-              Close
+          </section>
+          <div class="modal-footer add-place-modal__footer">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              @click="closeModal"
+            >
+              Fechar
             </button>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
           </div>
         </form>
       </div>
@@ -136,10 +139,10 @@
 <script>
 import FormText from "../../molecules/forms/form-text.vue";
 import FormSelect from "../../molecules/forms/form-select.vue";
-import FormRadio from "../../molecules/forms/form-radio.vue";
+import FormRadio from "../../molecules/forms/form-radio/form-radio.vue";
 import SearchField from "../../molecules/search-field/index.vue";
 import Map from "../../molecules/map/index.vue";
-
+import { usePlacesStore } from "../../../stores/places";
 
 export default {
   props: {
@@ -172,11 +175,11 @@ export default {
         { id: "socket-3", value: "Muitas", label: "Muitas" },
       ],
       noiseOptions: [
-        { id: "noise-1", value: "Sim, bastante", label: "Sim, bastante" },
+        { id: "noise-1", value: "Bastante", label: "Bastante" },
         {
           id: "noise-2",
-          value: "Sim, mas tolerável",
-          label: "Sim, mas tolerável",
+          value: "Tolerável",
+          label: "Tolerável",
         },
         { id: "noise-3", value: "Não", label: "Não" },
       ],
@@ -189,17 +192,17 @@ export default {
         { id: "space-2", value: "Não", label: "Não" },
       ],
       place: {
-        location: "",
+        location: [],
         name: "",
         selectedType: null,
         website: "",
         instagram: "",
         socket: "",
-        wifi: false,
+        wifi: "",
         wifiPassword: "",
-        isPay: false,
+        isPay: "",
         noise: "",
-        image: "",
+        email: "lucas.lopes5@hotmail.com",
       },
     };
   },
@@ -209,11 +212,22 @@ export default {
     },
     findPlaceOnMap(event) {
       this.center = event;
-      this.place.location = this.center;
+      this.place.location = this.center[1];
       this.zoom = 15;
       console.log(this.center);
     },
+    async sendEmail() {
+      const confirmationLink = "https://example.com/confirmation";
+      // await this.$mail.send({
+      //   message: {
+      //     to: this.email,
+      //   },
+      //   subject: "Confirmation of place addition",
+      //   text: `Your place has been added successfully! Please click on the following link to confirm your addition: ${confirmationLink}`,
+      // });
+    },
     handleSubmit() {
+      const placesStore = usePlacesStore();
       const place = {
         location: this.place.location,
         name: this.place.name,
@@ -225,18 +239,15 @@ export default {
         wifiPassword: this.place.wifiPassword,
         isPay: this.place.isPay,
         noise: this.place.noise,
-        image: this.place.image,
       };
-
-      const placeAdded = useState("placeAdded", place);
-      placeAdded;
-      console.log(place);
-      //this.closeModal(); // Close modal after form submission
+      placesStore.addPlace(place);
+      this.sendEmail();
+      this.closeModal();
     },
   },
 };
 </script>
 
-<style>
-/* Add your custom styles here */
+<style lang="scss" scoped>
+@import "./add-place-modal";
 </style>
