@@ -2,9 +2,12 @@
   <section class="search-template">
     <div class="container">
       <div class="search-template__search-content">
-        <img class="search-template__sun" src="../../../assets/images/sun.png"/>
-        <Icon class="search-template__wave" name="WaveIcon"/>
-        <Icon class="search-template__wave" name="WaveIcon"/>
+        <img
+          class="search-template__sun"
+          src="../../../assets/images/sun.png"
+        />
+        <Icon class="search-template__wave" name="WaveIcon" />
+        <Icon class="search-template__wave" name="WaveIcon" />
         <div class="search-template__grey-background"></div>
         <!-- Your content here -->
         <h2>Encontre lugares para trabalhar remotamente em Salvador</h2>
@@ -34,70 +37,141 @@
         <Card
           v-for="(place, index) in places"
           :key="`place-${index}`"
-          :name="place.name"
-          :type="place.type"
-          :website="place.website"
-          :instagram="place.instagram"
-          :socket="place.socket"
-          :wifi="place.wifi"
-          :wifiPassword="place.wifiPassword"
-          :space="place.space"
-          :noise="place.noise"
-          :image="place.image"
+          :place="place"
+          @edit-place="updatePlace"
         />
       </section>
+      <modal @handleSubmit="handleSubmit">
+        <template #header>{{ modalService.modalState.value.title }}</template>
+        <place-form :place="selectedPlace"></place-form>
+      </modal>
     </div>
   </section>
 </template>
+
 
 <script>
 import Card from "../../molecules/card";
 import FormText from "../../molecules/forms/form-text";
 import FormSwitch from "../../molecules/forms/form-switch/form-switch.vue";
 import { usePlacesStore } from "../../../stores/places";
-import { storeToRefs } from "pinia";
-import {Icon} from "#components";
-
-const store = storeToRefs(usePlacesStore());
+import { Icon } from "#components";
+import { onMounted, ref, inject } from "vue";
+import { defineAsyncComponent } from 'vue';
+import PlaceForm from "../../organisms/place-form/index.vue";
+import { collection, addDoc, updateDoc, doc, onSnapshot } from "firebase/firestore";
+import { useModal } from '../../../services/modal-service';
 
 export default {
   data() {
     return {
-      search: "",
-      places: store.places,
+      search: ""
     };
-  },
-  setup(props) {
-    const filteredList = store.places;
-    console.log(filteredList);
-    return {
-      filteredList,
-    };
-  },
+  }, 
   components: {
     Card,
     Icon,
     FormText,
     FormSwitch,
+    Modal: defineAsyncComponent(() =>
+      import('../../organisms/modal/index.vue')
+    ),
     usePlacesStore,
+    PlaceForm
   },
-  methods: {
-    filterWifi(wifiStatus) {
-      if (wifiStatus === "yes") {
-        const filtered = this.places.filter((item) => item.wifi === wifiStatus);
-        filteredList.value = filtered;
+  setup() {
+    const center = ref([]);
+    const nuxtApp = useNuxtApp();
+    const selectedPlace = ref({});
+    const places = ref({});
+    const modalService = inject('modalService');
+
+    useModal();
+
+    const handleSubmit = (place) => {
+        if (place.id) {
+          editPlace(place);       
+         } else {
+          addPlace(place);
+        }
+        modalService.closeModal();    
       }
-    },
-    filteredPlaces() {
-      const filtered = this.places.filter((item) =>
-        item.name.toLowerCase().includes(searchPlace.value.toLowerCase())
-      );
-      filteredList.value = filtered;
-    },
+
+    onMounted(async () => {
+      onSnapshot(collection(nuxtApp.$db, "places"), (querySnapshot) => {
+        const fbPlaces = [];
+        querySnapshot.forEach((doc) => {
+          const place = {
+            id: doc.id,
+            name: doc.data().name,
+            location: doc.data().location,
+            type: doc.data().type,
+            website: doc.data().website,
+            instagram: doc.data().instagram,
+            socket: doc.data().socket,
+            wifi: doc.data().wifi,
+            wifiPassword: doc.data().wifiPassword,
+            isPay: doc.data().isPay,
+            noise: doc.data().noise,
+          };
+          fbPlaces.push(place);
+        });
+        places.value = fbPlaces;
+      });
+    })
+
+    const editPlace = (place) => {
+      updateDoc(
+          doc(collection(nuxtApp.$db, "places"), place.id),
+          {
+            location: place.location,
+            name: place.name,
+            website: place.website,
+            type: place.selectedType,
+            instagram: place.instagram,
+            socket: place.socket,
+            wifi: place.wifi,
+            wifiPassword: place.wifiPassword,
+            isPay: place.isPay,
+            noise: place.noise,
+          }
+        );
+    }
+
+    const addPlace = (place) => {
+        addDoc(collection(nuxtApp.$db, "places"), {
+          location: placeenter.value,
+          name: place.name,
+          website: place.website,
+          type: place.type,
+          instagram: place.instagram,
+          socket: place.socket,
+          wifi: place.wifi,
+          wifiPassword: place.wifiPassword,
+          isPay: place.isPay,
+          noise: place.noise,
+        });    
+    };
+
+    function updatePlace(id) {
+      selectedPlace.value = places.value.find((place) => place.id == id);
+      modalService.openModal(selectedPlace.value, 'Editar lugar');
+    }
+
+    return {
+      editPlace,
+      addPlace,
+      updatePlace,
+      handleSubmit,
+      selectedPlace,
+      modalService,
+      center,
+      places,
+    };
   },
 };
 </script>
 
 <style lang="scss">
-@import "./search-template.scss"
+@import "./search-template.scss";
 </style>

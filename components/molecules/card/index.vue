@@ -1,39 +1,43 @@
 <template>
   <div class="card">
-    <img v-if="image" class="w-100" :src="createObjectURL(image)" alt="placeImage" />
-    <h3>{{ name }}</h3>
+    <img v-if="place.image" class="w-100" :src="createObjectURL(place.image)" alt="placeImage" />
+    <h3>{{ place.name }}</h3>
     <ul class="card__places">
-      <li>Shopping Barra</li>
+      <li>{{ place.locationSelected }}</li>
       <li>5km</li>
-      <li>{{ type }}</li>
+      <li>{{ place.type }}</li>
     </ul>
+    <button type="button" @click="removePlace(place.id)">Deletar</button>
+    <button @click="editPlace(place.id)" class="btn btn-primary">
+        Editar
+      </button>
     <div class="card__features">
       <ul class="card__itens">
         <li>
           <Icon name="LinkIcon" />
-          <a :href="website">
+          <a :href="place.website">
             Website
           </a>
         </li>
         <li>
-          <a :href="instagram">
+          <a :href="place.instagram">
             <Icon name="InstagramIcon" />
             Instagram
           </a>
         </li>
         <li>
           <Icon name="SocketsIcon" />
-          Muitas
+          {{ place.socket }}
           <!-- {{ socket }} -->
         </li>
         <li>
           <Icon name="WifiIcon" />
           <!-- {{ wifi }} -->
-          Wifi gratuito
+          {{ place.wifi }}
         </li>
         <li>
-          <Icon name="NoiseIcon" v-if="noise === 'yes' || noise === 'tolerable'" />
-          {{ noise }}
+          <Icon name="NoiseIcon" v-if="place.noise === 'yes' || place.noise === 'tolerable'" />
+          {{ place.noise }}
         </li>
       </ul>
       <button type="button" class="card__location btn btn-link" >
@@ -42,7 +46,7 @@
     </div>
     <div class="card__footer">
       <p>
-       <Icon name="LockIcon" /> {{ wifiPassword }}
+       <Icon name="LockIcon" /> {{ place.wifiPassword }}
        12345678
       </p>
       <button class="btn btn-link" type="button">Copiar</button>
@@ -52,31 +56,34 @@
 
 <script>
 import {Icon} from "#components";
+import { collection, doc, deleteDoc, updateDoc } from "firebase/firestore";
 
 export default {
   props: {
-    name: String,
-    type: String,
-    website: String,
-    instagram: String,
-    socket: String,
-    wifi: String,
-    space: String,
-    noise: String,
-    image: Object,
-    wifiPassword: String
+    place: Object,
   },
   components: {
-    Icon
+    Icon,
   },
   setup(props) {
+    const nuxtApp = useNuxtApp();
+    
     const createObjectURL = (image) => {
-      return image ? URL.createObjectURL(image) : null;
+      return place.image ? URL.createObjectURL(image) : null;
     };
+    const removePlace = (id) => {
+      deleteDoc(doc(collection(nuxtApp.$db, "places"), id));
+    }
 
     return {
-      createObjectURL
+      createObjectURL,
+      removePlace
     };
+  },
+  methods: {
+    editPlace(id) {      
+      this.$emit("editPlace", id)
+    }
   }
 };
 </script>

@@ -8,30 +8,23 @@
         Adicione um lugar
       </button>
     </header>
-    <add-place-modal :show-modal="showModal" @close-modal="closeModal"></add-place-modal>
   </div>
 </template>
 
 <script>
-import AddPlaceModal from "../../organisms/add-place-modal/index.vue";
+import { inject } from 'vue';
 
 export default {
-  components: {
-    AddPlaceModal,
-  },
-  data() {
+  setup() {
+    const modalService = inject('modalService');
+
+    function openModal() {
+      modalService.openModal('');
+    }
     return {
-      showModal: false,
-    };
-  },
-  methods: {
-    openModal() {
-      this.showModal = true;
-    },
-    closeModal() {
-      this.showModal = false; // Set the flag to false to hide the modal
-    },
-  },
+      openModal
+    }
+  }
 };
 </script>
 

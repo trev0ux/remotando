@@ -1,16 +1,19 @@
 <template>
   <div>
-    <header-component></header-component>
     <slot></slot>
   </div>
 </template>
 
 <script>
-import HeaderComponent from "../components/molecules/header/index.vue";
+import { useModal } from '~/services/modal-service';
 
 export default {
-  components: {
-    HeaderComponent,
+  setup() {
+    const modalService = useModal();
+
+    return {
+      modalService
+    }
   },
 };
 </script>

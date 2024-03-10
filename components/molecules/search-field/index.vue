@@ -63,8 +63,8 @@ export default {
       }
     },
     selectSuggestion(suggestion) {
-      console.log(suggestion);
-      this.$emit('suggestionSelected',  [suggestion.lat, suggestion.lon])
+      this.$emit('suggestionSelected',  [suggestion.lat, suggestion.lon]);
+      this.$emit('suggestionLabel', suggestion.label);
       this.suggestions = [];
     },
   },

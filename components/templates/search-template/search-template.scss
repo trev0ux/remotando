@@ -29,64 +29,6 @@
         }
     }
 
-    
-    &__search-field {
-        position: relative;
-        display: flex;
-        align-items: center;
-        max-width: 790px;
-        margin: 0 auto;
-
-        > div {
-            width: 100%;
-            display: flex;
-            align-items: center;
-        }
-
-        button {
-            position: absolute;
-            right: 6px;
-
-            span {
-                @include media-breakpoint-down(sm) {
-                    display: none;
-                }
-            }
-        }
-
-        input {
-            border: 1px solid rgba($light-black, 0.6);
-            height: 65px;
-            border-radius: 100px;
-            padding-left: 50px;
-
-            @include media-breakpoint-down(sm) {
-                padding-left: 25px;
-            }
-
-            &::placeholder {
-                color: rgba($light-black, 0.6);
-                @include font-size($font-big);
-
-                @include media-breakpoint-down(sm) {
-                    @include font-size($font-regular);
-                }
-            }
-        }
-
-        svg {
-            width: 20px;
-            height: 20px;
-            stroke: $white;
-            stroke-width: 3px;
-            margin-left: 5px;
-
-            @include media-breakpoint-down(sm) {
-                margin-left: 0;
-            }
-        }
-    }
-
     &__sun {
         position: absolute;
         top: -60px;
@@ -159,6 +101,63 @@
         }
 
 
+    }
+
+    &__search-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 790px;
+        margin: 0 auto;
+
+        > div {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            position: absolute;
+            right: 6px;
+
+            span {
+                @include media-breakpoint-down(sm) {
+                    display: none;
+                }
+            }
+        }
+
+        input {
+            border: 1px solid rgba($light-black, 0.6);
+            height: 65px;
+            border-radius: 100px;
+            padding-left: 50px;
+
+            @include media-breakpoint-down(sm) {
+                padding-left: 25px;
+            }
+
+            &::placeholder {
+                color: rgba($light-black, 0.6);
+                @include font-size($font-big);
+
+                @include media-breakpoint-down(sm) {
+                    @include font-size($font-regular);
+                }
+            }
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+            stroke: $white;
+            stroke-width: 3px;
+            margin-left: 5px;
+
+            @include media-breakpoint-down(sm) {
+                margin-left: 0;
+            }
+        }
     }
 
     &__search-content {

@@ -32,6 +32,7 @@ export default defineNuxtConfig({
     }],
   ],
   plugins: [
-    { src: '~/plugins/leaflet-geosearch.ts', mode: 'client' }
+    { src: '~/plugins/leaflet-geosearch.ts', mode: 'client' },
+    { src: '~/plugins/firebase.client.ts', mode: 'client'}
   ]
 })
