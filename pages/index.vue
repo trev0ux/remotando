@@ -13,13 +13,13 @@
               Desbrave essa cidade maravilhosa sendo um nômade digital para
               conhecer o que ela tem de melhor!
             </p>
-            <div>
+            <nuxt-link to="/search">
               <Icon name="TextIcon" class="landing-page__text-circle" />
               <Icon name="ArrowIcon" class="landing-page__arrow" />
-            </div>
+            </nuxt-link>
           </div>
         </div>
-        <NuxtImg src="/salvador.png" alt="foto da cidade" />
+        <NuxtImg src="/cafelier.jpg" alt="foto da cidade" />
       </div>
     </div>
 
@@ -47,10 +47,9 @@
               <div>
                 <Icon name="PinIcon" />
               </div>
-              <h3>Explore o melhor da cidade enquanto trabalha!</h3>
+              <h3>Descubra se o local é adequado para você</h3>
               <p>
-                Cafeterias e estabelecimentos para trabalhar remotamente e
-                desbrave a cidade para conhecer mais!
+                Entenda se o estabelecimento está adequado para te receber com feedbacks reais da qualidade do ambiente, wifi e dentre outros
               </p>
             </div>
           </div>
@@ -59,10 +58,9 @@
               <div>
                 <Icon name="InstagramIcon" />
               </div>
-              <h3>Explore o melhor da cidade enquanto trabalha!</h3>
+              <h3>Veja redes sociais e informações para contato</h3>
               <p>
-                Cafeterias e estabelecimentos para trabalhar remotamente e
-                desbrave a cidade para conhecer mais!
+                Entre em contato diretamente se for necessário para fazer uma reserva ou conhecer o cardápio
               </p>
             </div>
           </div>

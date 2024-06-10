@@ -1,12 +1,15 @@
 <template>
   <div class="container">
     <header class="header">
-      <div class="header__logo">
+      <nuxt-link to="/" class="header__logo">
         <logo-icon icon-name="LogoIcon" />
-      </div>
-      <button @click="openModal" class="btn btn-primary">
+      </nuxt-link>
+      <button v-if="showAddBtn" @click="openModal" class="btn btn-primary">
         Adicione um lugar
       </button>
+      <nuxt-link to="/search" v-else class="btn btn-primary">
+        Explorar lugares
+      </nuxt-link> 
     </header>
   </div>
 </template>
@@ -15,6 +18,11 @@
 import { inject } from 'vue';
 
 export default {
+  computed: {
+    showAddBtn(){
+      return this.$route.name === 'search';
+    }
+  },
   setup() {
     const modalService = inject('modalService');
 

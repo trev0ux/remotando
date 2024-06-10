@@ -1,0 +1,41 @@
+@import "../../../assets/styles/_base/_typography";
+@import "../../../assets/styles/_base/variables";
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/mixins/_breakpoints";
+
+.footer {
+    padding: 30px 0;
+
+    > div {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        @include media-breakpoint-down(md) {
+            justify-content: center;
+            gap: 30px;
+        }
+
+        > div {
+            display: flex;
+            gap: 30px;
+
+            a {
+                text-decoration: none;
+            }
+
+            @include media-breakpoint-down(md) {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+            }
+        }
+
+        p {
+            @include font-size($font-small);
+        }
+
+    }
+}

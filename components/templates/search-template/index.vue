@@ -2,9 +2,10 @@
   <section class="search-template">
     <div class="container">
       <div class="search-template__search-content">
-        <img
+        <NuxtImg
+          src="/images/sun.png"
+          alt="foto da cidade"
           class="search-template__sun"
-          src="../../../assets/images/sun.png"
         />
         <Icon class="search-template__wave" name="WaveIcon" />
         <Icon class="search-template__wave" name="WaveIcon" />
@@ -49,7 +50,6 @@
   </section>
 </template>
 
-
 <script>
 import Card from "../../molecules/card";
 import FormText from "../../molecules/forms/form-text";
@@ -57,45 +57,51 @@ import FormSwitch from "../../molecules/forms/form-switch/form-switch.vue";
 import { usePlacesStore } from "../../../stores/places";
 import { Icon } from "#components";
 import { onMounted, ref, inject } from "vue";
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent } from "vue";
 import PlaceForm from "../../organisms/place-form/index.vue";
-import { collection, addDoc, updateDoc, doc, onSnapshot } from "firebase/firestore";
-import { useModal } from '../../../services/modal-service';
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
+import { useModal } from "../../../services/modal-service";
 
 export default {
   data() {
     return {
-      search: ""
+      search: "",
     };
-  }, 
+  },
   components: {
     Card,
     Icon,
     FormText,
     FormSwitch,
     Modal: defineAsyncComponent(() =>
-      import('../../organisms/modal/index.vue')
+      import("../../organisms/modal/index.vue")
     ),
     usePlacesStore,
-    PlaceForm
+    PlaceForm,
   },
   setup() {
     const center = ref([]);
     const nuxtApp = useNuxtApp();
     const selectedPlace = ref({});
     const places = ref({});
-    const modalService = inject('modalService');
+    const modalService = inject("modalService");
 
     useModal();
 
     const handleSubmit = (place) => {
-        if (place.id) {
-          editPlace(place);       
-         } else {
-          addPlace(place);
-        }
-        modalService.closeModal();    
+      if (place.id) {
+        editPlace(place);
+      } else {
+        addPlace(place);
       }
+      modalService.closeModal();
+    };
 
     onMounted(async () => {
       onSnapshot(collection(nuxtApp.$db, "places"), (querySnapshot) => {
@@ -118,44 +124,41 @@ export default {
         });
         places.value = fbPlaces;
       });
-    })
+    });
 
     const editPlace = (place) => {
-      updateDoc(
-          doc(collection(nuxtApp.$db, "places"), place.id),
-          {
-            location: place.location,
-            name: place.name,
-            website: place.website,
-            type: place.selectedType,
-            instagram: place.instagram,
-            socket: place.socket,
-            wifi: place.wifi,
-            wifiPassword: place.wifiPassword,
-            isPay: place.isPay,
-            noise: place.noise,
-          }
-        );
-    }
+      updateDoc(doc(collection(nuxtApp.$db, "places"), place.id), {
+        location: place.location,
+        name: place.name,
+        website: place.website,
+        type: place.selectedType,
+        instagram: place.instagram,
+        socket: place.socket,
+        wifi: place.wifi,
+        wifiPassword: place.wifiPassword,
+        isPay: place.isPay,
+        noise: place.noise,
+      });
+    };
 
     const addPlace = (place) => {
-        addDoc(collection(nuxtApp.$db, "places"), {
-          location: placeenter.value,
-          name: place.name,
-          website: place.website,
-          type: place.type,
-          instagram: place.instagram,
-          socket: place.socket,
-          wifi: place.wifi,
-          wifiPassword: place.wifiPassword,
-          isPay: place.isPay,
-          noise: place.noise,
-        });    
+      addDoc(collection(nuxtApp.$db, "places"), {
+        location: placeenter.value,
+        name: place.name,
+        website: place.website,
+        type: place.type,
+        instagram: place.instagram,
+        socket: place.socket,
+        wifi: place.wifi,
+        wifiPassword: place.wifiPassword,
+        isPay: place.isPay,
+        noise: place.noise,
+      });
     };
 
     function updatePlace(id) {
       selectedPlace.value = places.value.find((place) => place.id == id);
-      modalService.openModal(selectedPlace.value, 'Editar lugar');
+      modalService.openModal(selectedPlace.value, "Editar lugar");
     }
 
     return {

@@ -5,6 +5,8 @@
 @import "bootstrap/scss/mixins/_breakpoints";
 
 .landing-page {
+    margin-top: 30px;
+
     &__banner {
         position: relative;
         display: flex;
@@ -21,27 +23,29 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            border-bottom-right-radius: 150px;
+            overflow: hidden;
         }
     }
 
     &__banner-text {
         position: relative;
         left: -1px;
-        
+
         h1 {
             margin-bottom: 0;
             color: $light-black;
             @include font-size($font-xx-large);
             font-weight: $font-weight--bold;
 
-            @include media-breakpoint-down(sm) {
+            @include media-breakpoint-down(md) {
                 @include font-size($font-xx-big);
             }
 
-            p {
+            p { 
                 margin-bottom: 0;
                 background-color: $background;
-                padding: 8px 0 8px 8px;
+                padding: 8px 8px 8px 0px;
                 border-top-right-radius: 10px;
                 border-bottom-right-radius: 10px;
 
@@ -50,7 +54,8 @@
                 }
 
                 &:nth-child(1) {
-                    width: 680px;
+                    width: 630px;
+                    border-top-right-radius: 0;
 
                     @include media-breakpoint-down(sm) {
                         width: 306px;
@@ -58,7 +63,7 @@
                 }
 
                 &:nth-child(2) {
-                    width: 720px;
+                    width: 695px;
 
                     @include media-breakpoint-down(sm) {
                         width: 335px;
@@ -98,7 +103,7 @@
             p {
                 margin-bottom: 0;
             }
-            div {
+            a {
                 position: absolute;
                 display: flex;
                 justify-content: center;
@@ -147,12 +152,12 @@
 }
 
 .how-it-works {
-    padding-top: 180px;
+    padding: 180px 0;
     position: relative;
     overflow: hidden;
 
-    @include media-breakpoint-down(sm) {
-        padding-top: 80px;
+    @include media-breakpoint-down(md) {
+        padding: 80px 0;
     }
 
     &__wave {
@@ -165,7 +170,7 @@
             right: -270px;
             bottom: 123px;
 
-            @include media-breakpoint-down(sm) {
+            @include media-breakpoint-down(md) {
                display: none;
             }
         }
@@ -174,7 +179,7 @@
             left: -225px;
             top: 55px;
 
-            @include media-breakpoint-down(sm) {
+            @include media-breakpoint-down(md) {
                 left: -280px;
                 top: 124px;
             }
@@ -201,8 +206,9 @@
             height: 14px;
             top: -14px;
             left: 0;
+            background-size: cover;
 
-            @include media-breakpoint-down(sm) {
+            @include media-breakpoint-down(md) {
                 top: -5px;
                 background-size: contain;
                 background-repeat: no-repeat;
@@ -222,7 +228,7 @@
             top: 0;
             z-index: -1;
 
-            @include media-breakpoint-down(sm) {
+            @include media-breakpoint-down(md) {
                 height: 100%;
                 left: 0;
                 border-bottom-left-radius: 50px;
@@ -244,12 +250,12 @@
         padding: 28px 24px;
         border-radius: 20px;
 
-        @include media-breakpoint-down(sm) {
+        @include media-breakpoint-down(md) {
             margin-bottom: 20px;
         }
 
         > div {
-            box-shadow: 0px 8px 11px rgba(0, 0, 0, 0);
+            box-shadow: 0px 2px 11px rgb(0, 0, 0, .1);            
             border-radius: 1000px;
             display: flex;
             align-items: center;

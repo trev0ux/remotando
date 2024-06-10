@@ -19,7 +19,7 @@
         }
     }
 
-    button {
+    button, a {
         @include media-breakpoint-down(sm) {
             @include font-size($font-small);
         }
