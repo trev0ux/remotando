@@ -210,7 +210,6 @@
 
             @include media-breakpoint-down(md) {
                 top: -5px;
-                background-size: contain;
                 background-repeat: no-repeat;
             }
         }
@@ -231,8 +230,7 @@
             @include media-breakpoint-down(md) {
                 height: 100%;
                 left: 0;
-                border-bottom-left-radius: 50px;
-                border-bottom-right-radius: 50px;
+                border-radius: 0;
             }
         }
     }
