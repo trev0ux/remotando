@@ -4,7 +4,7 @@
       <div class="landing-page__banner">
         <div class="landing-page__banner-text">
           <h1>
-            <p>Cafeterias e outros locais</p>
+            <p>Conheça estabelecimentos</p>
             <p>para trabalhar remotamente</p>
             <p>em Salvador</p>
           </h1>
