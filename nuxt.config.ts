@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   modules: ['nuxt-icon',
     'nuxt3-leaflet',
     '@pinia/nuxt',
+    '@nuxt/image',
     ['nuxt-mail', {
       message: {
         to: 'lucas.lopes5@hotmail.com',

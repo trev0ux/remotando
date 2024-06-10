@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/image": "^1.7.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vue/compat": "^3.1.0",
     "leaflet": "^1.9.4",

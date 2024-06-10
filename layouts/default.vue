@@ -1,11 +1,13 @@
 <template>
   <div>
-    <slot></slot>
+    <header-component @open-modal="openModal"></header-component>
+       <slot></slot>
   </div>
 </template>
 
 <script>
 import { useModal } from '~/services/modal-service';
+import HeaderComponent from "../components/molecules/header/index.vue";
 
 export default {
   setup() {
@@ -15,6 +17,7 @@ export default {
       modalService
     }
   },
+  components: { HeaderComponent },
 };
 </script>
 
