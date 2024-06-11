@@ -228,7 +228,7 @@ export default {
           instagram: place.instagram,
           socket: place.socket,
           wifi: place.wifi,
-          wifiPassword: place.wifiPassword,
+          wifiPassword: place.wifiPassword ? place.wifiPassword : "",
           isPay: place.isPay,
           noise: place.noise,
         });
