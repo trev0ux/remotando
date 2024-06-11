@@ -120,6 +120,10 @@
             position: absolute;
             right: 6px;
 
+            @include media-breakpoint-down(sm) {
+                padding: 14px 16px;
+            }
+            
             span {
                 @include media-breakpoint-down(sm) {
                     display: none;

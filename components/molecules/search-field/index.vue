@@ -5,7 +5,7 @@
         id="search"
         v-model="searchQuery"
         @update:modelValue="searchLocations"
-        placeholder="Search for a location"
+        placeholder="Pesquise por uma localização"
       />
       <button class="btn p-0">
             <Icon name="SearchIcon" />

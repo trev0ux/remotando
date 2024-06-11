@@ -3,7 +3,9 @@
     <input
       type="checkbox"
       :id="id"
+      v-bind="$attrs"
       :value="value"
+      @change="toggle"
       class="form-check-input"
       v-model="isChecked"
     />
@@ -24,9 +26,15 @@ export default {
     label: String,
     checkedOptions: String,
   },
+  methods: {
+    toggle(event) {
+      console.log(event);
+      this.$emit("toggle", event.target.checked);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "./form-switch"
+@import "./form-switch";
 </style>

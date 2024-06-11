@@ -26,11 +26,13 @@ export default {
   setup() {
     const modalService = inject('modalService');
 
-    function openModal() {
-      modalService.openModal('');
-    }
     return {
-      openModal
+      modalService
+    }
+  },
+  methods: {
+    openModal() {
+      this.modalService.openModal('');
     }
   }
 };

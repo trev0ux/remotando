@@ -1,13 +1,13 @@
 <template>
   <div>
-    <label :for="id">{{ label }}</label>
+    <label class="form-label" :for="id">{{ label }}</label>
     <select
       :id="id"
       v-bind="$attrs"
       class="form-select"
       v-model="selected"
     >
-      <option :value="null" disabled selected>Select an option</option>
+      <option :value="null" disabled selected>Selecione uma opção</option>
       <option
         v-for="option in options"
         :key="option.value"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-component @open-modal="openModal"></header-component>
+    <header-component></header-component>
        <slot></slot>
     <footer-component></footer-component>
   </div>

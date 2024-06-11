@@ -3,7 +3,7 @@
     class="modal fade add-place-modal"
     v-if="modalService.modalState.value.isVisible"
     :class="{ show: modalService.modalState.value.isVisible }"
-    style="display: block;"
+    style="display: block"
     tabindex="-1"
     role="dialog"
   >
@@ -14,33 +14,20 @@
           <button
             type="button"
             class="btn-close"
-            @click="closeModal"            
+            @click="closeModal"
             aria-label="Close"
           ></button>
         </div>
-        <form @submit.prevent="handleSubmit" class="add-place-modal__form">
-          <section class="modal-body add-place-modal__body">
-            <slot></slot>
-          </section>
-          <div class="modal-footer add-place-modal__footer">
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              @click="closeModal"                       
-              >
-              Fechar
-            </button>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-          </div>
-        </form>
+        <section class="modal-body add-place-modal__body">
+          <slot></slot>
+        </section>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { inject } from 'vue';
-
+import { inject } from "vue";
 
 export default {
   props: {
@@ -49,7 +36,7 @@ export default {
     },
   },
   setup() {
-    const modalService = inject('modalService');
+    const modalService = inject("modalService");
 
     const closeModal = () => {
       modalService.closeModal();
@@ -65,9 +52,10 @@ export default {
   },
   methods: {
     handleSubmit() {
+      console.log(this.place);
       this.$emit("handleSubmit", this.place);
     },
-  }
+  },
 };
 </script>
 
