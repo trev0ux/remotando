@@ -18,6 +18,8 @@
           </button>
           <form-text
             type="text"
+            v-model="searchQuery"
+            @input="searchPlaces"
             placeholder="Procure lugares"
             id="search-field"
           />
@@ -66,12 +68,6 @@ import {
 } from "firebase/firestore";
 
 export default {
-  data() {
-    return {
-      search: "",
-      filteredPlaces: []
-    };
-  },
   components: {
     Card,
     Icon,
@@ -88,9 +84,15 @@ export default {
     const nuxtApp = useNuxtApp();
     const selectedPlace = ref({});
     const places = ref({});
+    const filteredPlaces = ref({});
     const modalService = inject("modalService");
+    const searchQuery = ref("");
 
     onMounted(async () => {
+      populatePlace();
+    });
+
+    function populatePlace() {
       onSnapshot(collection(nuxtApp.$db, "places"), (querySnapshot) => {
         const fbPlaces = [];
         querySnapshot.forEach((doc) => {
@@ -110,31 +112,42 @@ export default {
           fbPlaces.push(place);
         });
         places.value = fbPlaces;
+        filteredPlaces.value = places.value;
       });
-    });
+    }
 
     function updatePlace(id) {
       selectedPlace.value = places.value.find((place) => place.id == id);
       modalService.openModal(selectedPlace.value, "Editar lugar");
     }
 
+    const filterWifi = (e) => {
+      if (e) {
+        filteredPlaces.value = places.value.filter((item) => item.wifi === 'Sim');
+      } else {
+        filteredPlaces.value = places.value;
+      }
+    }
+
+    const searchPlaces = () => {
+      return filteredPlaces.value = places.value.filter(place => 
+        place.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+      );
+    }
+
     return {
       updatePlace,
       selectedPlace,
       modalService,
+      searchQuery,
+      populatePlace,
+      filterWifi,
+      searchPlaces,
+      filteredPlaces,
       center,
       places,
     };
   },
-  methods: {
-    filterWifi(e) {
-      if (e) {
-        this.filteredPlaces = this.places.filter((item) => item.wifi === 'Sim');
-      } else {
-        this.filteredPlaces = this.places;
-      }
-    }
-  }
 };
 </script>
 

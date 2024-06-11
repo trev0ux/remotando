@@ -139,7 +139,6 @@ import {
   addDoc,
   updateDoc,
   doc,
-  onSnapshot,
 } from "firebase/firestore";
 import { inject } from "vue";
 
@@ -256,7 +255,6 @@ export default {
       }
     },
     clearAll() {
-      console.log(this.place);
       this.place = {
         location: "",
         name: "",

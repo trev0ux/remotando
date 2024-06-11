@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     toggle(event) {
-      console.log(event);
       this.$emit("toggle", event.target.checked);
     },
   },
