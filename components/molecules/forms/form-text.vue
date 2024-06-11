@@ -10,6 +10,9 @@
       @keydown.enter="onInput"
       class="form-control"
     />
+    <div class="invalid-feedback" v-if="errorMessage">
+      {{ errorMessage }}
+    </div>
   </div>
 </template>
 
@@ -17,6 +20,10 @@
 export default {
   props: {
     label: {
+      type: String,
+      required: false,
+    },
+    errorMessage: {
       type: String,
       required: false,
     },

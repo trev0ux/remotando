@@ -3,6 +3,7 @@
     <div class="search-field">
       <form-text
         id="search"
+        required
         v-model="searchQuery"
         @update:modelValue="searchLocations"
         placeholder="Pesquise por uma localização"

@@ -7,6 +7,13 @@
 .landing-page {
     margin-top: 30px;
 
+    > .container {
+        @include media-breakpoint-down(md) {
+            overflow: initial;
+            padding: 0;
+        }
+    }
+
     &__banner {
         position: relative;
         display: flex;
@@ -42,7 +49,7 @@
                 @include font-size($font-xx-big);
             }
 
-            p { 
+            p {
                 margin-bottom: 0;
                 background-color: $background;
                 padding: 8px 8px 8px 0px;
@@ -50,7 +57,7 @@
                 border-bottom-right-radius: 10px;
 
                 @include media-breakpoint-down(sm) {
-                    padding: 0px 10px 15px 0px;
+                    padding: 0px 10px 15px 15px;
                 }
 
                 &:nth-child(1) {
@@ -68,7 +75,6 @@
                     @include media-breakpoint-down(sm) {
                         width: 335px;
                         border-top-right-radius: 0;
-
                     }
                 }
 
@@ -99,7 +105,7 @@
                 @include font-size($font-small);
                 line-height: 25px;
                 max-width: 200px;
-                padding: 10px 20px 20px 0px;
+                padding: 10px 20px 20px 15px;
             }
 
             p {
@@ -173,7 +179,7 @@
             bottom: 123px;
 
             @include media-breakpoint-down(md) {
-               display: none;
+                display: none;
             }
         }
 
@@ -182,7 +188,7 @@
             top: 55px;
 
             @include media-breakpoint-down(md) {
-                left: -280px;
+                left: -320px;
                 top: 124px;
             }
         }
@@ -199,6 +205,12 @@
     &__block {
         position: relative;
         padding-top: 55px;
+
+        @include media-breakpoint-down(md) {
+            padding-top: 80px;
+            position: relative;
+            padding-bottom: 80px;
+        }
 
         &:before {
             content: "";
@@ -255,7 +267,7 @@
         }
 
         > div {
-            box-shadow: 0px 2px 11px rgb(0, 0, 0, .1);            
+            box-shadow: 0px 2px 11px rgb(0, 0, 0, 0.1);
             border-radius: 1000px;
             display: flex;
             align-items: center;

@@ -53,11 +53,11 @@
         <Icon name="PinIcon" />
       </button>
     </div>
-    <div class="card__footer">
+    <div class="card__footer" v-if="place.wifiPassword">
       <p>
-        <Icon name="LockIcon" /> {{ place.wifiPassword }}
+        <Icon name="LockIcon" /> Senha do wifi
       </p>
-      <button class="btn btn-link" type="button">Copiar</button>
+      <button class="btn btn-link" type="button" @click="copyToClipboard">Copiar</button>
     </div>
   </div>
 </template>
@@ -92,6 +92,13 @@ export default {
     editPlace(id) {
       this.$emit("editPlace", id);
     },
+    async copyToClipboard() {
+      try {
+        await navigator.clipboard.writeText(this.place.wifiPassword);
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
+    }
   },
 };
 </script>

@@ -1,5 +1,9 @@
 <template>
-  <form @submit.prevent="handleSubmit" class="add-place-modal__form">
+  <form
+    @submit.prevent="handleSubmit"
+    class="add-place-modal__form"
+    id="place-form"
+  >
     <div class="row add-place-modal">
       <div class="col-12 col-lg-6">
         <div class="mb-3">
@@ -12,6 +16,7 @@
               type="text"
               placeholder="Nome"
               label="Nome"
+              required
               v-model="place.name"
               id="name"
             />
@@ -28,6 +33,7 @@
             <form-text
               type="text"
               placeholder="Instagram"
+              required
               label="Instagram"
               v-model="place.instagram"
             />
@@ -134,12 +140,7 @@ import FormSelect from "../../molecules/forms/form-select.vue";
 import FormRadio from "../../molecules/forms/form-radio/form-radio.vue";
 import SearchField from "../../molecules/search-field/index.vue";
 import Map from "../../molecules/map/index.vue";
-import {
-  collection,
-  addDoc,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { inject } from "vue";
 
 export default {
@@ -209,26 +210,31 @@ export default {
       this.place.location = [this.center[0], this.center[1]];
     },
     handleSubmit() {
-      if (this.place.id) {
-        this.editPlace(this.place);
+      var placeForm = document.getElementById("place-form");
+      if (placeForm.valid()) {
+        if (this.place.id) {
+          this.editPlace(this.place);
+        } else {
+          this.addPlace(this.place);
+        }
       } else {
-        this.addPlace(this.place);
+        console.log("erro")
       }
 
       this.closeModal();
       //this.clearAll();
     },
-    addPlace(place) {
+    async addPlace(place) {
       try {
-        addDoc(collection(this.nuxtApp.$db, "places"), {
-          location: place.location,
-          name: place.name,
-          website: place.website,
-          type: place.type,
-          instagram: place.instagram,
-          socket: place.socket,
-          wifi: place.wifi,
-          wifiPassword: place.wifiPassword ? place.wifiPassword : "",
+        await addDoc(collection(this.nuxtApp.$db, "places"), {
+          location: place.location ? place.location : " ",
+          name: place.name ? place.name : " ",
+          website: place.website ? place.website : " ",
+          type: place.type ? place.type : " ",
+          instagram: place.instagram ? place.instagram : " ",
+          socket: place.socket ? place.socket : " ",
+          wifi: place.wifi ? place.wifi : " ",
+          wifiPassword: place.wifiPassword ? place.wifiPassword : " ",
           isPay: place.isPay,
           noise: place.noise,
         });
@@ -239,14 +245,14 @@ export default {
     editPlace(place) {
       try {
         updateDoc(doc(collection(this.nuxtApp.$db, "places"), place.id), {
-          location: place.location,
-          name: place.name,
-          website: place.website,
-          type: place.type,
-          instagram: place.instagram,
-          socket: place.socket,
-          wifi: place.wifi,
-          wifiPassword: place.wifiPassword,
+          location: place.location ? place.location : " ",
+          name: place.name ? place.name : " ",
+          website: place.website ? place.website : " ",
+          type: place.type ? place.type : " ",
+          instagram: place.instagram ? place.instagram : " ",
+          socket: place.socket ? place.socket : " ",
+          wifi: place.wifi ? place.wifi : " ",
+          wifiPassword: place.wifiPassword ? place.wifiPassword : " ",
           isPay: place.isPay,
           noise: place.noise,
         });
