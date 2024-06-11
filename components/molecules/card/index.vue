@@ -56,7 +56,6 @@
     <div class="card__footer">
       <p>
         <Icon name="LockIcon" /> {{ place.wifiPassword }}
-        12345678
       </p>
       <button class="btn btn-link" type="button">Copiar</button>
     </div>
