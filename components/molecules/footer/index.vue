@@ -3,7 +3,7 @@
     <div class="container">
         <a href="https://github.com/trev0ux/remotando">Ver no github</a>
         <logo-icon icon-name="LogoIcon" />
-      <p class="m-0">2022 © Desenvolvido por Lucas Amorim</p>
+      <p class="m-0">2024 © Desenvolvido por Lucas Amorim</p>
     </div>
   </footer>
 </template>
