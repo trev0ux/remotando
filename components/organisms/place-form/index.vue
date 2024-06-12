@@ -210,16 +210,11 @@ export default {
       this.place.location = [this.center[0], this.center[1]];
     },
     handleSubmit() {
-      var placeForm = document.getElementById("place-form");
-      if (placeForm.valid()) {
         if (this.place.id) {
           this.editPlace(this.place);
         } else {
           this.addPlace(this.place);
         }
-      } else {
-        console.log("erro")
-      }
 
       this.closeModal();
       //this.clearAll();
