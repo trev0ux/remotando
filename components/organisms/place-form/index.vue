@@ -10,7 +10,7 @@
           <search-field @suggestionSelected="findPlaceOnMap" />
         </div>
         <fieldset>
-          <legend>Informações do estabelecimento</legend>
+          <legend>{{ $t("placeInfo") }}</legend>
           <div class="mb-3">
             <form-text
               type="text"
@@ -51,7 +51,7 @@
 
         <div class="mb-3">
           <fieldset>
-            <legend>Tem tomadas no ambiente?</legend>
+            <legend>{{ $t("hasSockets") }}</legend>
             <div>
               <form-radio
                 v-for="option in socketsOptions"
@@ -67,7 +67,7 @@
         </div>
         <div class="mb-3">
           <fieldset>
-            <legend>Tem ruído no ambiente?</legend>
+            <legend>{{ $t("hasNoise") }}</legend>
             <div>
               <form-radio
                 v-for="option in noiseOptions"
@@ -83,7 +83,7 @@
         </div>
         <div class="mb-3">
           <fieldset>
-            <legend>Tem wifi?</legend>
+            <legend>{{ $t("hasWifi") }}</legend>
             <div>
               <form-radio
                 v-for="option in wifiOptions"
@@ -107,7 +107,7 @@
         </div>
         <div class="mb-3">
           <fieldset>
-            <legend>O espaço é gratuito?</legend>
+            <legend>{{ $t("spaceIsFree") }}</legend>
             <div>
               <form-radio
                 v-for="option in spaceOptions"
@@ -128,9 +128,9 @@
     </div>
     <div class="modal-footer add-place-modal__footer">
       <button type="button" class="btn btn-outline-primary" @click="closeModal">
-        Fechar
+        {{ $t("close") }}
       </button>
-      <button type="submit" class="btn btn-primary">Enviar</button>
+      <button type="submit" class="btn btn-primary">{{ $t("send") }}</button>
     </div>
   </form>
 </template>
@@ -171,36 +171,36 @@ export default {
   data() {
     return {
       types: [
-        { value: "restaurant", label: "Restaurante" },
-        { value: "cafe", label: "Cafeteria" },
-        { value: "bar", label: "Bar" },
-        { value: "bar", label: "Coworking" },
-        { value: "bar", label: "Livraria" },
+        { value: "restaurant", label: this.$t("restaurant") },
+        { value: "cafe", label: this.$t("coffeeshop") },
+        { value: "bar", label: this.$t("pub") },
+        { value: "bar", label: this.$t("coworking") },
+        { value: "bar", label: this.$t("bookstore") },
         // Add more options as needed
       ],
       center: ["-12.9822499", "-38.4812772"],
       zoom: 13,
       socketsOptions: [
-        { id: "socket-1", value: "Nenhuma", label: "Nenhuma" },
-        { id: "socket-2", value: "Algumas", label: "Algumas" },
-        { id: "socket-3", value: "Muitas", label: "Muitas" },
+        { id: "socket-1", value: "Nenhuma", label: this.$t("none") },
+        { id: "socket-2", value: "Algumas", label: this.$t("some") },
+        { id: "socket-3", value: "Muitas", label: this.$t("many") },
       ],
       noiseOptions: [
-        { id: "noise-1", value: "Bastante", label: "Bastante" },
+        { id: "noise-1", value: "Bastante", label: this.$t('very') },
         {
           id: "noise-2",
           value: "Tolerável",
-          label: "Tolerável",
+          label: this.$t("tolerable"),
         },
-        { id: "noise-3", value: "Não", label: "Não" },
+        { id: "noise-3", value: "Não", label: this.$t("none") },
       ],
       wifiOptions: [
-        { id: "wifi-1", value: "Sim", label: "Sim" },
-        { id: "wifi-2", value: "Não", label: "Não" },
+        { id: "wifi-1", value: "Sim", label: this.$t("yes") },
+        { id: "wifi-2", value: "Não", label: this.$t("no") },
       ],
       spaceOptions: [
-        { id: "space-1", value: "Sim", label: "Sim" },
-        { id: "space-2", value: "Não", label: "Não" },
+        { id: "space-1", value: "Sim", label: this.$t("yes") },
+        { id: "space-2", value: "Não", label: this.$t("no") },
       ],
     };
   },

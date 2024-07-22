@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   },
   modules: ['nuxt-icon',
     'nuxt3-leaflet',
+    '@nuxtjs/i18n',
     '@pinia/nuxt',
     '@nuxt/image',
     ['nuxt-mail', {
@@ -32,6 +33,11 @@ export default defineNuxtConfig({
       },
     }],
   ],
+  i18n: {
+    locales: ['en', 'pt'],
+    defaultLocale: 'en',
+    vueI18n: './i18n.config.ts' // if you are using custom path, default
+  },
   plugins: [
     { src: '~/plugins/leaflet-geosearch.ts', mode: 'client' },
     { src: '~/plugins/firebase.client.ts', mode: 'client'}

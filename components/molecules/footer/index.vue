@@ -1,9 +1,9 @@
 <template>
   <footer class="footer">
     <div class="container">
-        <a href="https://github.com/trev0ux/remotando">Ver no github</a>
+        <a href="https://github.com/trev0ux/remotando">{{ $t("seeGithub") }}</a>
         <logo-icon icon-name="LogoIcon" />
-      <p class="m-0">2024 © Desenvolvido por Lucas Amorim</p>
+      <p class="m-0">{{ $t("footerText") }}</p>
     </div>
   </footer>
 </template>

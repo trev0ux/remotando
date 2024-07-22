@@ -11,16 +11,16 @@
         <Icon class="search-template__wave" name="WaveIcon" />
         <div class="search-template__grey-background"></div>
         <!-- Your content here -->
-        <h2>Encontre lugares para trabalhar remotamente em Salvador</h2>
+        <h2>{{ $t("exploreSearchPlaces") }}</h2>
         <div class="search-template__search-field">
           <button class="btn btn-primary">
-            <span>Pesquisar</span> <Icon name="SearchIcon" />
+            <span>{{ $t("search") }}</span> <Icon name="SearchIcon" />
           </button>
           <form-text
             type="text"
             v-model="searchQuery"
             @input="searchPlaces"
-            placeholder="Procure lugares"
+            :placeholder="$t('searchPlaces')"
             id="search-field"
           />
         </div>
@@ -31,8 +31,8 @@
             label="Wi-fi"
             @toggle="filterWifi"
           />
-          <form-switch id="custom-switch-2" label="Notas" />
-          <form-switch id="custom-switch-3" label="Distância" />
+          <form-switch id="custom-switch-2" :label="$t('notes')" />
+          <form-switch id="custom-switch-3" :label="$t('distance')" />
         </div>
       </div>
 
@@ -43,7 +43,7 @@
           :place="place"
           @edit-place="updatePlace"
         />
-        <h5 v-if="places.length == 0" class="text-center w-100">Nenhum local cadastrado</h5>
+        <h5 v-if="places.length == 0" class="text-center w-100">{{ $t("nonePlacesRegistered") }}</h5>
       </section>
       <modal>
         <template #header>{{ modalService.modalState.value.title }}</template>
@@ -66,6 +66,7 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
+import { useI18n } from 'vue-i18n';
 
 export default {
   components: {
@@ -87,6 +88,7 @@ export default {
     const filteredPlaces = ref({});
     const modalService = inject("modalService");
     const searchQuery = ref("");
+    const { t } = useI18n();
 
     onMounted(async () => {
       populatePlace();
@@ -118,7 +120,7 @@ export default {
 
     function updatePlace(id) {
       selectedPlace.value = places.value.find((place) => place.id == id);
-      modalService.openModal(selectedPlace.value, "Editar lugar");
+      modalService.openModal(selectedPlace.value, t('editPlace'));
     }
 
     const filterWifi = (e) => {
