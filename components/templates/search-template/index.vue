@@ -10,7 +10,6 @@
         <Icon class="search-template__wave" name="WaveIcon" />
         <Icon class="search-template__wave" name="WaveIcon" />
         <div class="search-template__grey-background"></div>
-        <!-- Your content here -->
         <h2>{{ $t("exploreSearchPlaces") }}</h2>
         <div class="search-template__search-field">
           <button class="btn btn-primary">
@@ -32,7 +31,7 @@
             @toggle="filterWifi"
           />
           <form-switch id="custom-switch-2" :label="$t('notes')" />
-          <form-switch id="custom-switch-3" :label="$t('distance')" />
+          <!-- <form-switch id="custom-switch-3" :label="$t('distance')" /> -->
         </div>
       </div>
 

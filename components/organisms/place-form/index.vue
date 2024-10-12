@@ -233,6 +233,7 @@ export default {
           isPay: place.isPay,
           noise: place.noise,
         });
+        this.clearAll();
       } catch (error) {
         console.log(error);
       }
@@ -251,6 +252,7 @@ export default {
           isPay: place.isPay,
           noise: place.noise,
         });
+        this.clearAll();
       } catch (error) {
         console.log(error);
       }
@@ -260,10 +262,10 @@ export default {
         location: "",
         name: "",
         website: "",
-        type: "",
+        type: null,
         instagram: "",
         socket: "",
-        wifi: "",
+        wifi: null,
         wifiPassword: "",
         isPay: "",
         noise: "",

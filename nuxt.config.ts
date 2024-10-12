@@ -4,15 +4,21 @@ export default defineNuxtConfig({
   css: [{ src: './assets/styles/globals.scss', lang: 'sass' }],
   app: {
     head: {
-      title: "Remotando",
-      script: [
-        {
-          src: "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js",
-          integrity:
-            "sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa",
-          crossorigin: "anonymous",
-        },
-      ],    
+      htmlAttrs: {
+        lang: 'en'
+      },
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'format-detection', content: 'telephone=no' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/png', href: '/favicon-48x48.png', sizes: '48x48' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/site.webmanifest' },
+      ]
     }
   },
   modules: ['nuxt-icon',

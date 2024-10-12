@@ -13,6 +13,18 @@ export default {
       isModalVisible: false
     };
   },
+  head() {
+    return {
+      title: this.$t('title'),
+      meta: [
+        { hid: 'description', name: 'description', content: this.$t('description') },
+        { property: 'og:title', content: this.$t('title') },
+        { property: 'og:description', content: this.$t('description') },
+        { name: 'twitter:title', content: this.$t('title') },
+        { name: 'twitter:description', content: this.$t('description') },
+      ]
+    }
+  },
   components: { searchTemplate },
   methods: {
     openModal() {

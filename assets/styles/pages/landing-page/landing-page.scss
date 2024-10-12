@@ -4,13 +4,40 @@
 @import "bootstrap/scss/_variables";
 @import "bootstrap/scss/mixins/_breakpoints";
 
+
 .landing-page {
-    margin-top: 30px;
 
     > .container {
         @include media-breakpoint-down(md) {
             overflow: initial;
             padding: 0;
+        }
+    }
+
+    &.landing-page-en {
+        .landing-page__banner-text {
+            h1 {
+                p {
+                    &:nth-child(1) {
+                        @include media-breakpoint-up(lg) {
+                            width: 605px;
+                        }
+                    }
+    
+                    &:nth-child(2) {
+                        @include media-breakpoint-up(lg) {
+                            width: 410px;
+                        }
+                    }
+    
+                    &:nth-child(3) {
+                        @include media-breakpoint-up(lg) {
+                            width: 295px;
+                            border-radius: 0; 
+                        }                       
+                    }
+                }
+            }
         }
     }
 

@@ -5,7 +5,7 @@
 @import "bootstrap/scss/mixins/_breakpoints";
 
 .header {
-    padding: 25px 0;
+    padding: 25px 0 15px;
     display: flex;
     justify-content: space-between;
 
@@ -19,7 +19,25 @@
         }
     }
 
-    button, a {
+    .form-switch {
+        padding-left: 1.2rem !important;
+        @include media-breakpoint-down(md) {
+            padding-left: 1.2rem !important;
+        }
+
+        .form-check-input {
+            @include media-breakpoint-down(lg) {
+                width: 2.8rem !important;
+
+                &:checked {
+                    background-position: 17px -2px !important;
+                }
+            }
+        }
+    }
+
+    button,
+    a {
         @include media-breakpoint-down(sm) {
             @include font-size($font-small);
         }

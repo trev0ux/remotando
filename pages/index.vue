@@ -1,5 +1,5 @@
 <template>
-  <section class="landing-page">
+  <section class="landing-page" :class="statusClass">
     <div class="container">
       <div class="landing-page__banner">
         <div class="landing-page__banner-text">
@@ -68,14 +68,28 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import { Icon } from "#components";
+import { useI18n } from 'vue-i18n';
 
-export default {
-  components: {
-    Icon,
-  },
-};
+const { locale, t } = useI18n()
+
+const statusClass = computed(() => {
+  return `landing-page-${locale.value}`
+});
+
+useHead(() => ({
+  title: t('title'),
+  meta: [
+    { name: 'description', content: t('description') },
+    // Open Graph / Facebook
+    { property: 'og:title', content: t('title') },
+    { property: 'og:description', content: t('description') },
+    // Twitter
+    { name: 'twitter:title', content: t('title') },
+    { name: 'twitter:description', content: t('description') },
+  ],
+}))
 </script>
 
 <style lang="sass">
