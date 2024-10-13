@@ -42,10 +42,17 @@ export default defineNuxtConfig({
   i18n: {
     locales: ['en', 'pt'],
     defaultLocale: 'en',
-    vueI18n: './i18n.config.ts' // if you are using custom path, default
+    vueI18n: './i18n.config.ts',
+    defaultLocale: 'en',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+    },
   },
   plugins: [
     { src: '~/plugins/leaflet-geosearch.ts', mode: 'client' },
-    { src: '~/plugins/firebase.client.ts', mode: 'client'}
+    { src: '~/plugins/firebase.client.ts', mode: 'client'},
+    '~/plugins/i18n-lang-storage.ts'
   ]
 })

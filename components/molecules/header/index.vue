@@ -12,9 +12,9 @@
           {{ $t("explorePlaces") }}
         </nuxt-link>
         <div class="form-check form-switch d-flex align-items-center">
-          <form-switch id="languageSwitch" :checked="$i18n.locale === 'pt'"
+          <form-switch id="languageSwitch" :checked="currentLanguage === 'pt'"
             @change="toggleLanguage" />
-          <label class="form-check-label ms-2" for="languageSwitch" v-if="$i18n.locale === 'pt'">PT</label>
+          <label class="form-check-label ms-2" for="languageSwitch" v-if="currentLanguage === 'pt'">PT</label>
           <label class="form-check-label ms-2" v-else>EN</label>
         </div>
       </div>
@@ -22,36 +22,37 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, inject } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 import FormSwitch from "../forms/form-switch/form-switch.vue"
-import { inject } from "vue";
+import { usePlacesStore } from "../../../stores/places";
 
-export default {
-  computed: {
-    showAddBtn() {
-      return this.$route.path.includes("/search");
-    },
-  },
-  components: {
-    FormSwitch
-  },
-  setup() {
-    const modalService = inject("modalService");
+const localeStore = usePlacesStore()
+const currentLanguage = ref(null)
+const { locale } = useNuxtApp().$i18n
 
-    return {
-      modalService,
-    };
-  },
-  methods: {
-    openModal() {
-      this.modalService.openModal("");
-    },
-    toggleLanguage(event) {
-      const newLocale = event.target.checked ? "pt" : "en";
-      this.$i18n.setLocale(newLocale);
-    },
-  },
-};
+onMounted(() => {
+  currentLanguage.value = localStorage.getItem('user-lang') || 'pt'
+  localeStore.setLocale(currentLanguage.value)
+})
+
+const toggleLanguage = (event) => {
+  const newLocale = event.target.checked ? 'pt' : 'en'
+  currentLanguage.value = newLocale
+  localeStore.setLocale(newLocale)
+  console.log(localeStore);
+}
+
+const route = useRoute()
+const showAddBtn = computed(() => route.path.includes("/search"))
+
+const modalService = inject("modalService")
+
+const openModal = () => {
+  modalService.openModal("")
+}
 </script>
 
 <style lang="sass">

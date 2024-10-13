@@ -3,7 +3,7 @@ export default defineI18nConfig(() => ({
   locale: "en",
   messages: {
     en: {
-      title: "Remote Work Spots in Salvador",
+      title: "Remotando - Remote Work Spots in Salvador",
       description:
         "Discover the best places to work remotely in Salvador, Bahia. From cozy cafes to vibrant coworking spaces, find your perfect remote work environment.",
       status: {
@@ -65,7 +65,7 @@ export default defineI18nConfig(() => ({
       searchLocation: "Search for a location...",
     },
     pt: {
-      title: "Locais para Trabalho Remoto em Salvador",
+      title: "Remotando - Locais para Trabalho Remoto em Salvador",
       description:
         "Descubra os melhores lugares para trabalhar remotamente em Salvador, Bahia. De cafés aconchegantes a espaços de coworking vibrantes, encontre seu ambiente perfeito para trabalho remoto.",
       status: {

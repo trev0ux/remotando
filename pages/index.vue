@@ -71,13 +71,20 @@
 <script setup>
 import { Icon } from "#components";
 import { useI18n } from 'vue-i18n';
+import { usePlacesStore } from "../../../stores/places";
 
 const { locale, t } = useI18n()
+const currentLanguage = ref(locale.value)
 
 const statusClass = computed(() => {
   return `landing-page-${locale.value}`
 });
 
+const localeStore = usePlacesStore()
+const currentLocale = computed(() => localeStore.currentLocale)
+onMounted(() => {
+  locale.value = currentLocale.value
+})
 useHead(() => ({
   title: t('title'),
   meta: [
